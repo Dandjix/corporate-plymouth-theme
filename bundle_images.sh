@@ -79,9 +79,13 @@ for f in "${VALID_FILES[@]}"; do
   SCRIPT_FU+="
     (let* (
       (image    (car (gimp-file-load RUN-NONINTERACTIVE \"${ESC_IN}\" \"${ESC_IN}\")))
-      (drawable (car (gimp-image-get-active-drawable image)))
+      (orig-w   (car (gimp-image-width  image)))
+      (orig-h   (car (gimp-image-height image)))
+      (scale    (min (/ 224 orig-w) (/ 224 orig-h)))
+      (new-w    (round (* orig-w scale)))
+      (new-h    (round (* orig-h scale)))
     )
-      (gimp-image-scale-full image 224 224 INTERPOLATION-LINEAR)
+      (gimp-image-scale-full image new-w new-h INTERPOLATION-LINEAR)
       (file-png-save RUN-NONINTERACTIVE image
                      (car (gimp-image-get-active-drawable image))
                      \"${ESC_OUT}\" \"${ESC_OUT}\"
@@ -92,7 +96,7 @@ for f in "${VALID_FILES[@]}"; do
 done
 SCRIPT_FU+=" (gimp-quit 0))"
 
-info "Launching GIMP to resize & export ${#VALID_FILES[@]} image(s) to 224×224 px …"
+info "Launching GIMP to resize & export ${#VALID_FILES[@]} image(s) (max 224×224, aspect ratio preserved) …"
 gimp -i -b "$SCRIPT_FU" 2>/dev/null
 
 # ── verify output & warn on missing ─────────────────────────────────────────
