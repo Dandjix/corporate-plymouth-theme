@@ -15,6 +15,9 @@ nb_rows = ceil(NB_IMAGES / row_size);
 x_spacing = Window.GetWidth() / (row_size + 1);
 y_spacing = Window.GetHeight() / (nb_rows + 1);
 
+margin = 100;
+target_width = Math.Int(Window.GetWidth() / (row_size+1) - margin);
+target_height = Math.Int(Window.GetHeight() / (nb_rows+1) - margin);
 
 for(i = 1; i <= nb_rows; i++)
 {
@@ -35,7 +38,11 @@ for(i = 1; i <= nb_rows; i++)
     {
       w = image[index].image.GetWidth();
       h = image[index].image.GetHeight();
-      image[index].image = image[index].image.Scale(w * 2,h * 2);
+
+      w_ratio = target_width / w;
+      h_ratio = target_height / h;
+      mult = Math.Min(w_ratio,h_ratio);
+      image[index].image = image[index].image.Scale(w * mult,h * mult);
     }
 
     image[index].sprite = Sprite(image[index].image);
