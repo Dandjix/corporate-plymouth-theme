@@ -3,18 +3,23 @@ Window.SetBackgroundBottomColor (0.85, 0.3, 0);
 
 spacing = Window.GetWidth() / (NB_IMAGES + 1);
 
-for(i = 1; i <= NB_IMAGES; i++)
+for(i = 1; i <= 1; i++)
 {
-  image[i].image = Image("" + i + ".png");
+  for(j = 1; j <= NB_IMAGES; j++)
   {
-    w = image[i].image.GetWidth();
-    h = image[i].image.GetHeight();
-    image[i].image = image[i].image.Scale(w * 2,h * 2);
-  }
+    index = (i - 1) * NB_IMAGES + j;
 
-  image[i].sprite = Sprite(image[i].image);
-  image[i].sprite.SetOpacity(1);
-  image[i].x = spacing * i - image[i].image.GetWidth() / 2;
-  image[i].y = Window.GetY() + Window.GetHeight() / 2 - image[i].image.GetHeight() / 2;
-  image[i].sprite.SetPosition(image[i].x, image[i].y, 0);
+    image[index].image = Image("" + index + ".png");
+    {
+      w = image[index].image.GetWidth();
+      h = image[index].image.GetHeight();
+      image[index].image = image[index].image.Scale(w * 2,h * 2);
+    }
+
+    image[index].sprite = Sprite(image[index].image);
+    image[index].sprite.SetOpacity(1);
+    image[index].x = spacing * index - image[index].image.GetWidth() / 2;
+    image[index].y = Window.GetY() + Window.GetHeight() / 2 - image[index].image.GetHeight() / 2;
+    image[index].sprite.SetPosition(image[index].x, image[index].y, 0);
+  }
 }
