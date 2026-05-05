@@ -4,7 +4,7 @@ echo If you see nothing, switch to a graphics-less session and execute it there 
 echo Testing...
 sudo plymouthd
 sudo plymouth --show-splash
-sleep 10
+sleep 3
 sudo plymouth quit
 echo Done!
 echo Have a nice day!
