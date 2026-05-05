@@ -1,5 +1,5 @@
-Window.SetBackgroundTopColor (0.85, 0.3, 0);
-Window.SetBackgroundBottomColor (0.85, 0.3, 0);
+Window.SetBackgroundTopColor (0.0, 0.0, 0);
+Window.SetBackgroundBottomColor (0.0, 0.0, 0);
 
 fun ceil(x)
 {
@@ -52,3 +52,10 @@ for(i = 1; i <= nb_rows; i++)
     image[index].sprite.SetPosition(image[index].x, image[index].y, 0);
   }
 }
+
+fun progress_callback (time, progress)
+{
+  Window.SetBackgroundTopColor (0.85 * progress, 0.3 * progress, 0);
+  Window.SetBackgroundBottomColor (0.85 * progress, 0.3 * progress, 0);
+}
+Plymouth.SetBootProgressFunction (progress_callback);
