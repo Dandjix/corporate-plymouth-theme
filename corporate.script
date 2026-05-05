@@ -1,13 +1,35 @@
 Window.SetBackgroundTopColor (0.85, 0.3, 0);
 Window.SetBackgroundBottomColor (0.85, 0.3, 0);
 
-spacing = Window.GetWidth() / (NB_IMAGES + 1);
-
-for(i = 1; i <= 1; i++)
+fun ceil(x)
 {
-  for(j = 1; j <= NB_IMAGES; j++)
+  if(x % 1 == 0)
   {
-    index = (i - 1) * NB_IMAGES + j;
+    return Math.Int(x);
+  }
+  return Math.Int(x) + 1;
+}
+
+row_size = 4;
+nb_rows = ceil(NB_IMAGES / row_size);
+x_spacing = Window.GetWidth() / (row_size + 1);
+y_spacing = Window.GetHeight() / (nb_rows + 1);
+
+
+for(i = 1; i <= nb_rows; i++)
+{
+  if(i < nb_rows)
+  {
+    j_max = row_size;
+  }
+  else
+  {
+    j_max = NB_IMAGES % row_size;
+  }
+
+  for(j = 1; j <= j_max; j++)
+  {
+    index = (i - 1) * row_size + j;
 
     image[index].image = Image("" + index + ".png");
     {
@@ -18,8 +40,8 @@ for(i = 1; i <= 1; i++)
 
     image[index].sprite = Sprite(image[index].image);
     image[index].sprite.SetOpacity(1);
-    image[index].x = spacing * index - image[index].image.GetWidth() / 2;
-    image[index].y = Window.GetY() + Window.GetHeight() / 2 - image[index].image.GetHeight() / 2;
+    image[index].x = x_spacing * j - image[index].image.GetWidth() / 2;
+    image[index].y = y_spacing * i - image[index].image.GetHeight() / 2;
     image[index].sprite.SetPosition(image[index].x, image[index].y, 0);
   }
 }
