@@ -11,11 +11,11 @@ fun ceil(x)
 }
 
 nb_rows = ceil(NB_IMAGES / ROW_SIZE);
-x_spacing = Window.GetWidth() / (ROW_SIZE + 1);
-y_spacing = Window.GetHeight() / (nb_rows + 1);
+x_spacing = (Window.GetWidth() - 2 * OUTER_MARGIN_PX) / (ROW_SIZE);
+y_spacing = (Window.GetHeight() - 2 * OUTER_MARGIN_PX) / (nb_rows);
 
-target_width = Math.Int(Window.GetWidth() / (ROW_SIZE+1) - INNER_MARGIN_PX);
-target_height = Math.Int(Window.GetHeight() / (nb_rows+1) - INNER_MARGIN_PX);
+target_width = Math.Int((Window.GetWidth() - 2 * OUTER_MARGIN_PX) / (ROW_SIZE + 1) - INNER_MARGIN_PX);
+target_height = Math.Int((Window.GetHeight() - 2 * OUTER_MARGIN_PX) / (nb_rows + 1) - INNER_MARGIN_PX);
 
 for(i = 1; i <= nb_rows; i++)
 {
@@ -45,8 +45,8 @@ for(i = 1; i <= nb_rows; i++)
 
     image[index].sprite = Sprite(image[index].image);
     image[index].sprite.SetOpacity(1);
-    image[index].x = x_spacing * j - image[index].image.GetWidth() / 2;
-    image[index].y = y_spacing * i - image[index].image.GetHeight() / 2;
+    image[index].x = OUTER_MARGIN_PX + x_spacing/2 + x_spacing * (j-1) - image[index].image.GetWidth() / 2;
+    image[index].y = OUTER_MARGIN_PX + y_spacing/2 + y_spacing * (i-1) - image[index].image.GetHeight() / 2;
     image[index].sprite.SetPosition(image[index].x, image[index].y, 0);
   }
 }
