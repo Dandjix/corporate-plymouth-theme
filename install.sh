@@ -7,9 +7,13 @@ sudo tar -xzf images.tar.gz -C /usr/share/plymouth/themes/corporate/
 # you may get errors related to those two lines, they may be fine (it depends on how your images was compressed)
 sudo mv /usr/share/plymouth/themes/corporate/images/* /usr/share/plymouth/themes/corporate/
 sudo rmdir /usr/share/plymouth/themes/corporate/images
-NB=$(ls /usr/share/plymouth/themes/corporate/ | grep -c '\.png')
-sudo sed -i "s/NB_IMAGES/$NB/" /usr/share/plymouth/themes/corporate/corporate.script
+NB_IMAGES=$(ls /usr/share/plymouth/themes/corporate/ | grep -c '\.png')
+source params.env
+sudo sed -i "s/NB_IMAGES/$NB_IMAGES/" /usr/share/plymouth/themes/corporate/corporate.script
 sudo sed -i 's/CORPORATE_PATH/\/usr/g' /usr/share/plymouth/themes/corporate/corporate.plymouth
+sudo sed -i "s/ROW_SIZE/$ROW_SIZE/" /usr/share/plymouth/themes/corporate/corporate.script
+sudo sed -i "s/INNER_MARGIN_PX/$INNER_MARGIN_PX/" /usr/share/plymouth/themes/corporate/corporate.script
+sudo sed -i "s/OUTER_MARGIN_PX/$OUTER_MARGIN_PX/" /usr/share/plymouth/themes/corporate/corporate.script
 sudo update-alternatives --quiet --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/corporate/corporate.plymouth 200
 sudo update-alternatives --quiet --set default.plymouth /usr/share/plymouth/themes/corporate/corporate.plymouth
 sudo update-initramfs -u

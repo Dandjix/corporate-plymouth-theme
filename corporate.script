@@ -10,29 +10,27 @@ fun ceil(x)
   return Math.Int(x) + 1;
 }
 
-row_size = 4;
-nb_rows = ceil(NB_IMAGES / row_size);
-x_spacing = Window.GetWidth() / (row_size + 1);
+nb_rows = ceil(NB_IMAGES / ROW_SIZE);
+x_spacing = Window.GetWidth() / (ROW_SIZE + 1);
 y_spacing = Window.GetHeight() / (nb_rows + 1);
 
-margin = 100;
-target_width = Math.Int(Window.GetWidth() / (row_size+1) - margin);
-target_height = Math.Int(Window.GetHeight() / (nb_rows+1) - margin);
+target_width = Math.Int(Window.GetWidth() / (ROW_SIZE+1) - INNER_MARGIN_PX);
+target_height = Math.Int(Window.GetHeight() / (nb_rows+1) - INNER_MARGIN_PX);
 
 for(i = 1; i <= nb_rows; i++)
 {
-  if(i < nb_rows || NB_IMAGES % row_size == 0)
+  if(i < nb_rows || NB_IMAGES % ROW_SIZE == 0)
   {
-    j_max = row_size;
+    j_max = ROW_SIZE;
   }
   else
   {
-    j_max = NB_IMAGES % row_size;
+    j_max = NB_IMAGES % ROW_SIZE;
   }
 
   for(j = 1; j <= j_max; j++)
   {
-    index = (i - 1) * row_size + j;
+    index = (i - 1) * ROW_SIZE + j;
 
     image[index].image = Image("" + index + ".png");
     {
