@@ -25,3 +25,8 @@ run 'install.sh' to install the theme. If you want to test this theme with diffe
 
 ### Uninstallation
 to uninstall, run 'uninstall.sh'
+
+# Credit
+I generated the bundle_images.sh script with claude.
+
+I took inspiration from this theme : https://www.gnome-look.org/p/2354544
