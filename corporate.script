@@ -53,7 +53,7 @@ for(i = 1; i <= nb_rows; i++)
 
 fun progress_callback (time, progress)
 {
-  Window.SetBackgroundTopColor (0.85 * progress, 0.3 * progress, 0);
-  Window.SetBackgroundBottomColor (0.85 * progress, 0.3 * progress, 0);
+  Window.SetBackgroundTopColor (TARGET_COLOR_R * progress, TARGET_COLOR_G * progress, TARGET_COLOR_B * progress);
+  Window.SetBackgroundBottomColor (TARGET_COLOR_R * progress, TARGET_COLOR_G * progress, TARGET_COLOR_B * progress);
 }
 Plymouth.SetBootProgressFunction (progress_callback);
